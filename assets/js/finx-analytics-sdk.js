@@ -5,6 +5,7 @@ class FinxAnalytics {
     this.dataplaneUrl = config.dataplaneUrl;
     this.sessionId = this.generateSessionId();
     this.userId = this.getOrCreateUserId();
+    this.clientId = "68d2453d19834411cbcdb035"; // Static client ID
   }
 
   generateSessionId() {
@@ -25,6 +26,7 @@ class FinxAnalytics {
       event: eventName,
       properties: {
         ...properties,
+        client_id: this.clientId,
         timestamp: new Date().toISOString(),
         sessionId: this.sessionId,
         userId: this.userId,
