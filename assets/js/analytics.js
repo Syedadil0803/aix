@@ -15,7 +15,7 @@
 
   const pageName = getPageName();
 
-  // Track page load
+  // Track page load - only anonymous ID
   trackEvent("impression", {
     page: window.location.pathname,
     page_name: pageName,
