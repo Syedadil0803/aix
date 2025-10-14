@@ -4,8 +4,8 @@ class FinxAnalytics {
     this.writeKey = config.writeKey;
     this.dataplaneUrl = config.dataplaneUrl;
     this.sessionId = this.generateSessionId();
-    this.userId = this.getOrCreateUserId();
-    this.clientId = "68d2453d19834411cbcdb035"; // Static client ID
+    this.userId = this.getOrCreateUserId(); // Using user_id instead of anonymousId
+    this.clientId = "68d2453d19834411cbcdb035";
   }
 
   generateSessionId() {
@@ -15,7 +15,7 @@ class FinxAnalytics {
   getOrCreateUserId() {
     let userId = localStorage.getItem('finx_user_id');
     if (!userId) {
-      userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+      userId = 'user_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
       localStorage.setItem('finx_user_id', userId);
     }
     return userId;
@@ -29,11 +29,11 @@ class FinxAnalytics {
         client_id: this.clientId,
         timestamp: new Date().toISOString(),
         sessionId: this.sessionId,
-        userId: this.userId,
+        user_id: this.userId, // Using user_id in properties
         url: window.location.href,
         userAgent: navigator.userAgent
       },
-      context: {
+      context: { // Keeping context as requested
         library: {
           name: 'finx-analytics-sdk',
           version: '1.0.0'

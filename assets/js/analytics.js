@@ -1,6 +1,6 @@
 (function() {
   const CONFIG = {
-    writeKey: "33E0iVy6zroU31pZLHEGFXa0Sfe", // unique to this client
+    writeKey: "33E0iVy6zroU31pZLHEGFXa0Sfe",
     dataplaneUrl: "https://aairavxhrwapyh.dataplane.rudderstack.com"
   };
 
@@ -18,7 +18,7 @@
   // Track page load
   trackEvent("impression", {
     page: window.location.pathname,
-    page_name: pageName, // ADDED
+    page_name: pageName,
     device: /Mobi|Android/i.test(navigator.userAgent) ? "mobile" : "desktop"
   });
 
@@ -29,7 +29,7 @@
         cta_name: e.target.dataset.ctaName || "unknown",
         component_name: e.target.dataset.componentName || "unknown",
         page: window.location.pathname,
-        page_name: pageName, // ADDED
+        page_name: pageName,
         device: /Mobi|Android/i.test(navigator.userAgent) ? "mobile" : "desktop"
       });
     }
@@ -37,19 +37,18 @@
 
   // Track hovers with 5-second cooldown between API calls
   let lastHoverApiCall = 0;
-  const HOVER_COOLDOWN = 5000; // 5 seconds in milliseconds
+  const HOVER_COOLDOWN = 5000;
   
   document.addEventListener("mouseover", (e) => {
     if (e.target.dataset.hoverTrack) {
       const now = Date.now();
       
-      // Check if 5 seconds have passed since last hover API call
       if (now - lastHoverApiCall >= HOVER_COOLDOWN) {
         trackEvent(e.target.dataset.hoverTrack, {
           cta_name: e.target.dataset.ctaName || "unknown",
           component_name: e.target.dataset.componentName || "unknown",
           page: window.location.pathname,
-          page_name: pageName, // ADDED
+          page_name: pageName,
           device: /Mobi|Android/i.test(navigator.userAgent) ? "mobile" : "desktop"
         });
         lastHoverApiCall = now;
